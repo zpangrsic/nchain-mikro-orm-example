@@ -1,4 +1,5 @@
 import { Options } from '@mikro-orm/core';
+import { TSMigrationGenerator } from '@mikro-orm/migrations';
 import { TsMorphMetadataProvider } from '@mikro-orm/reflection';
 import { ConfigService } from '@nestjs/config';
 
@@ -15,6 +16,14 @@ const mikroOrmConfig: Options = {
   metadataProvider: TsMorphMetadataProvider,
   entities: ['./dist/**/*.entity.js'],
   entitiesTs: ['./src/**/*.entity.ts'],
+  migrations: {
+    path: 'dist/migrations',
+    pathTs: 'src/migrations',
+    glob: '!(*.d).{js,ts}',
+    emit: 'ts',
+    generator: TSMigrationGenerator,
+    transactional: true,
+  },
 };
 
 export default mikroOrmConfig;

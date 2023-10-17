@@ -3,6 +3,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigModule } from '@nestjs/config';
 import { OrmModule } from './orm/orm.module';
+import { TodoModule } from './todo/todo.module';
+import { TagModule } from './tags/tag.module';
 
 @Module({
   imports: [
@@ -11,6 +13,8 @@ import { OrmModule } from './orm/orm.module';
       envFilePath: '.env',
     }),
     OrmModule,
+    TodoModule,
+    TagModule,
   ],
   controllers: [AppController],
   providers: [AppService],

@@ -1,0 +1,218 @@
+{
+  "namespaces": [
+    "public"
+  ],
+  "name": "public",
+  "tables": [
+    {
+      "columns": {
+        "name": {
+          "name": "name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "date_created": {
+          "name": "date_created",
+          "type": "timestamptz(0)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "mappedType": "datetime"
+        },
+        "date_modified": {
+          "name": "date_modified",
+          "type": "timestamptz(0)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "mappedType": "datetime"
+        },
+        "date_deleted": {
+          "name": "date_deleted",
+          "type": "timestamptz(0)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "mappedType": "datetime"
+        }
+      },
+      "name": "tags",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "tags_pkey",
+          "columnNames": [
+            "name"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "id": {
+          "name": "id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "default": "uuid_generate_v4()",
+          "mappedType": "uuid"
+        },
+        "date_created": {
+          "name": "date_created",
+          "type": "timestamptz(0)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "length": 0,
+          "mappedType": "datetime"
+        },
+        "date_modified": {
+          "name": "date_modified",
+          "type": "timestamptz(0)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "mappedType": "datetime"
+        },
+        "date_deleted": {
+          "name": "date_deleted",
+          "type": "timestamptz(0)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "length": 0,
+          "mappedType": "datetime"
+        },
+        "value": {
+          "name": "value",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        },
+        "completed": {
+          "name": "completed",
+          "type": "boolean",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": true,
+          "default": "false",
+          "mappedType": "boolean"
+        }
+      },
+      "name": "todos",
+      "schema": "public",
+      "indexes": [
+        {
+          "columnNames": [
+            "value"
+          ],
+          "composite": false,
+          "keyName": "todos_value_index",
+          "primary": false,
+          "unique": false
+        },
+        {
+          "keyName": "todos_pkey",
+          "columnNames": [
+            "id"
+          ],
+          "composite": false,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {}
+    },
+    {
+      "columns": {
+        "todo_id": {
+          "name": "todo_id",
+          "type": "uuid",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "uuid"
+        },
+        "tag_name": {
+          "name": "tag_name",
+          "type": "varchar(255)",
+          "unsigned": false,
+          "autoincrement": false,
+          "primary": false,
+          "nullable": false,
+          "mappedType": "string"
+        }
+      },
+      "name": "todos_tags",
+      "schema": "public",
+      "indexes": [
+        {
+          "keyName": "todos_tags_pkey",
+          "columnNames": [
+            "todo_id",
+            "tag_name"
+          ],
+          "composite": true,
+          "primary": true,
+          "unique": true
+        }
+      ],
+      "checks": [],
+      "foreignKeys": {
+        "todos_tags_todo_id_foreign": {
+          "constraintName": "todos_tags_todo_id_foreign",
+          "columnNames": [
+            "todo_id"
+          ],
+          "localTableName": "public.todos_tags",
+          "referencedColumnNames": [
+            "id"
+          ],
+          "referencedTableName": "public.todos",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        },
+        "todos_tags_tag_name_foreign": {
+          "constraintName": "todos_tags_tag_name_foreign",
+          "columnNames": [
+            "tag_name"
+          ],
+          "localTableName": "public.todos_tags",
+          "referencedColumnNames": [
+            "name"
+          ],
+          "referencedTableName": "public.tags",
+          "deleteRule": "cascade",
+          "updateRule": "cascade"
+        }
+      }
+    }
+  ]
+}

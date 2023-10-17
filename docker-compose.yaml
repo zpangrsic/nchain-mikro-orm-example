@@ -2,7 +2,7 @@ services:
   db:
     image: postgres:14
     volumes:
-      nchain-example:/var/lib/postgresql/data
+      - nchain-example:/var/lib/postgresql/data
     environment:
       - POSTGRES_DB=nchain
       - POSTGRES_USER=nchain
